@@ -36,7 +36,6 @@ import resources.lib.skeleton as sk
 from resources.lib.labels import LABELS
 from resources.lib import common
 import resources.lib.cq_utils as cqu
-from resources.lib import vpn
 
 
 def get_sorted_menu(menu_id):
@@ -95,20 +94,6 @@ def add_context_menus_to_item(
         hide_item,
         plugin.localize(LABELS['Hide']),
         item_id=item_id)
-
-    # Connect/Disconnect VPN
-    with storage.PersistentDict('vpn') as db:
-        vpn_label = plugin.localize(LABELS['Connect VPN'])
-        if 'status' in db:
-            if db['status'] == 'connected':
-                vpn_label = plugin.localize(LABELS['Disconnect VPN'])
-        else:
-            db['status'] = 'disconnected'
-            db.flush()
-
-        item.context.script(
-            vpn.vpn_item_callback,
-            vpn_label)
 
     return
 
@@ -411,25 +396,6 @@ def hide_item(plugin, item_id):
     xbmc.executebuiltin('XBMC.Container.Refresh()')
     return False
 
-
-@Route.register
-def vpn_import_setting(plugin):
-    # Callback function of OpenVPN import config file setting button
-    vpn.import_ovpn()
-    return False
-
-
-@Route.register
-def vpn_delete_setting(plugin):
-    # Callback function of OpenVPN delete config file setting button
-    vpn.delete_ovpn()
-    return False
-
-
-@Route.register
-def vpn_connectdisconnect_setting(plugin):
-    # Callback function of OpenVPN connect/disconnect setting button
-    return vpn.vpn_item_callback(plugin)
 
 
 def main():
