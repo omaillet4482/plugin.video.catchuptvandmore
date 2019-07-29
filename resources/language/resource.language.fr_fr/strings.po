@@ -17,6 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # Settings tabs/categories (from 30000 to 30019)
+
 msgctxt "#30000"
 msgid "Main menu"
 msgstr "Menu principal"
@@ -52,6 +53,7 @@ msgstr "Sites internet"
 
 
 # Settings line separators (from 30010 to 30029)
+
 msgctxt "#30010"
 msgid "Hide main menu categories"
 msgstr "Masquer des catégories du menu principal"
@@ -82,6 +84,7 @@ msgstr "Masquer des pays pour le replay TV"
 
 
 # Main menu (from 30030 to 30049)
+
 msgctxt "#30030"
 msgid "Live TV"
 msgstr "TV en direct"
@@ -100,6 +103,7 @@ msgstr "Favoris"
 
 
 # Countries (from 30050 to 30079)
+
 msgctxt "#30050"
 msgid "France"
 msgstr "France"
@@ -157,6 +161,7 @@ msgid "China"
 msgstr "Chine"
 
 # Channels (from 30080 to 30129)
+
 msgctxt "#30080"
 msgid "French channels"
 msgstr "Chaînes françaises"
@@ -218,6 +223,7 @@ msgstr "Chaînes chinoises"
 
 
 # Quality and content (from 30150 to 30199)
+
 msgctxt "#30150"
 msgid "Video quality"
 msgstr "Qualité vidéo"
@@ -387,6 +393,7 @@ msgstr "Cache vidé"
 
 
 # Context menu (from 30500 to 30599)
+
 msgctxt "#30500"
 msgid "Move down"
 msgstr "Descendre"
@@ -405,6 +412,7 @@ msgstr "Télécharger"
 
 
 # Dialog boxes (from 30600 to 30699)
+
 msgctxt "#30600"
 msgid "Information"
 msgstr "Information"
@@ -419,7 +427,7 @@ msgstr "Ce contenu est protégé par DRM. Pour pouvoir le lire nous vous inviton
 
 msgctxt "#30603"
 msgid "This content is DRM protected. The download mode doesn't work for this kind of protection. Thank you for your understanding."
-msgstr "Ce contenu est protégé par DRM. Le mode "téléchargement" ne fonctionne pas pour un contenu protégé par DRM. Merci pour votre compréhension"
+msgstr "Ce contenu est protégé par DRM. Le mode téléchargement ne fonctionne pas pour un contenu protégé par DRM. Merci pour votre compréhension"
 
 msgctxt "#30604"
 msgid "Access to this content requires an account %s. You can provide your credentials for it in the settings of this add-on. If you don't have an account, you can create one at this url %s."
@@ -435,6 +443,7 @@ msgstr "Voulez-vous voir cette information la prochaine fois ?"
 
 
 # Others (from 30700 to 30799)
+
 msgctxt "#30700"
 msgid "More videos..."
 msgstr "Plus de vidéos..."
