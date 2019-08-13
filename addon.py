@@ -42,7 +42,6 @@ from resources.lib.labels import LABELS
 from resources.lib import common
 import resources.lib.cq_utils as cqu
 from resources.lib.listitem_utils import item2dict, get_item_label
-from resources.lib.vpn import vpn_item_callback, add_vpn_context, import_ovpn, delete_ovpn
 import resources.lib.favourites as fav
 
 
@@ -123,8 +122,6 @@ def add_context_menus_to_item(plugin, item, index, menu_id, menu_len,
                         plugin.localize(LABELS['Hide']),
                         item_id=item.params['item_id'])
 
-    # Connect/Disconnect VPN
-    add_vpn_context(item)
 
     # Add to add-on favourites
     is_playable = False
