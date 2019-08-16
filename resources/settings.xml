@@ -1248,11 +1248,6 @@
 
 
 
-
-
-
-
-
     <!-- Advanced settings / Tools and other things to save -->
     <category label="30005">
         <setting label="30370" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/main/clear_cache/)"/>

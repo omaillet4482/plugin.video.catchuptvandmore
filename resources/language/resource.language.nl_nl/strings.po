@@ -369,8 +369,6 @@ msgstr "UKTVPlay wachtwoord"
 # Reserved space for other tab/category in settins (from 30260 to 30339)
 
 
-# OpenVPN (from 30340 to 30369)
-
 
 # Advanced settings (from 30370 to 30399)
 
