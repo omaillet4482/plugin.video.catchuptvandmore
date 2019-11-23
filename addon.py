@@ -221,19 +221,11 @@ def tv_guide_menu(plugin, **kwargs):
     menu_id = kwargs.get('item_id')
     menu = get_sorted_menu(plugin, menu_id)
 
-    try:
-        # Load xmltv module
-        xmltv = importlib.import_module('resources.lib.xmltv')
+    # Load xmltv module
+    xmltv = importlib.import_module('resources.lib.xmltv')
 
-        # Get tv_guide of this country
-        tv_guide = xmltv.grab_tv_guide(menu_id, menu)
-    except Exception as e:
-        Script.notify(
-            Script.localize(LABELS['TV guide']),
-            Script.localize(LABELS['An error occurred while getting TV guide']),
-            display_time=7000)
-        Script.log('xmltv module failed with error: {}'.format(e, lvl=Script.ERROR))
-        tv_guide = {}
+    # Get tv_guide of this country
+    tv_guide = xmltv.grab_tv_guide(menu_id, menu)
 
     for index, (channel_order, channel_id, channel_infos) in enumerate(menu):
 
