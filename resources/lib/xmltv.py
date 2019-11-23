@@ -301,8 +301,11 @@ def programme_post_treatment(programme):
         local_tz = pytz.timezone('Europe/Paris')
 
     # Get UTC start and stop datetime
+    print('PROGRAMME:', programme)
     start_s = programme['start']
+    print('start_s:', start_s)
     stop_s = programme['stop']
+    print('stop_s:', stop_s)
 
     # Convert start and stop on naive datetime object
     start_dt = datetime.datetime.strptime(start_s, date_format_notz)
