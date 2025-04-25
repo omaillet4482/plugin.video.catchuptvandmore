@@ -453,7 +453,6 @@ menu = {
             "BFM MARSEILLE PROVENCE": {},
             "BFM NICE COTE D'AZUR": {},
             "BFM NORMANDIE": {},
-            "BFM PARIS ILE-DE-FRANCE": {},
             "BFM TOULON VAR": {},
         },
         'enabled': True,
