@@ -187,23 +187,24 @@ def get_stream_with_quality(plugin,
                             subtitles=None,
                             bypass=False,
                             workaround=None,
-                            input_stream_properties=None):
+                            input_stream_properties=None
+                            ):
 
     """ Returns the stream for the bitrate or the requested quality.
 
-    :param plugin:                      plugin
-    :param str video_url:               The url to download
-    :param str manifest_type:           Manifest type
-    :param dict headers:                the headers, always used for stream, and license only if custom_license_headers is not set
-    :param dict custom_license_headers: the license headers, used only for the license, leaving 'headers' only for the stream part
-    :param str license_url:        licence url
-    :param bool append_query_string:    Should the existing query string be appended?
-    :param bool map_audio:              Map audio streams
-    :param bool verify:                 verify ssl?
-    :param str subtitles:               subtitles url
-    :param bool bypass:                 use IA to read stream with only one resolution
-    :param str workaround:     workaround an inpustream adaptive bug for live split in chapters (see IA issue #1066)
-    :param dict input_stream_properties:            inputstream properties
+    :param plugin:                       plugin
+    :param str video_url:                The url to download
+    :param str manifest_type:            Manifest type
+    :param dict headers:                 the headers, always used for stream, and license only if custom_license_headers is not set
+    :param dict custom_license_headers:  the license headers, used only for the license, leaving 'headers' only for the stream part
+    :param str license_url:              licence url
+    :param bool append_query_string:     Should the existing query string be appended?
+    :param bool map_audio:               Map audio streams
+    :param bool verify:                  verify ssl?
+    :param str subtitles:                subtitles url
+    :param bool bypass:                  use IA to read stream with only one resolution
+    :param str workaround:               workaround an inpustream adaptive bug for live split in chapters (see IA issue #1066)
+    :param dict input_stream_properties: inputstream properties
 
     :return: An item for the stream
     :rtype: Listitem
@@ -410,25 +411,30 @@ def get_brightcove_video_json(plugin,
     resp = urlquick.get(URL_BRIGHTCOVE_VIDEO_JSON % (data_account, data_video_id), headers=headers)
 
     json_parser = json.loads(resp.text)
+
     video_url = ''
     license_url = None
-    is_drm = False
-    manifest = 'hls'
+    found_non_drm = False
 
     if 'sources' in json_parser:
         for url in json_parser["sources"]:
-            # Workaroud Inputstream adative can not play some types of AES crypted streams
+            # Prefer non-drmed hls videos
             if 'src' in url:
-                if ('m3u8' in url["src"] or 'container' in url) and (is_drm is False):
-                    manifest = 'hls'
-                    video_url = url["src"]
-                if 'manifest.mpd' in url["src"]:
-                    is_drm = True
-                    if 'key_systems' in url:
-                        if 'com.widevine.alpha' in url["key_systems"]:
-                            license_url = url['key_systems']['com.widevine.alpha']['license_url']
+                video_url = url["src"]
+                if ('key_systems' not in url):
+                    if ('m3u8' in url["src"]) or ('container' in url):
+                        manifest = 'hls'
+                        break
+                    if 'manifest.mpd' in url["src"]:
+                        manifest = 'mpd'
+                        found_non_drm = True
+                else:
+                    if (not found_non_drm) and ('com.widevine.alpha' in url["key_systems"]):
+                        license_url = url['key_systems']['com.widevine.alpha']['license_url']
+                        if ('m3u8' in url["src"]) or ('container' in url):
+                            manifest = 'hls'
+                        if 'manifest.mpd' in url["src"]:
                             manifest = 'mpd'
-                            video_url = url["src"]
 
     else:
         if json_parser[0]['error_code'] == "ACCESS_DENIED":
