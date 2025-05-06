@@ -70,11 +70,11 @@ URL_MTVNSERVICES_STREAM_ACCOUNT_EP = 'https://media-utils.mtvnservices.com/servi
 URL_FRANCETV_PROGRAM_INFO = 'https://k7.ftven.fr/videos/%s'
 # VideoId
 
-URL_FRANCETV_HDFAUTH_URL = 'https://hdfauthftv-a.akamaihd.net/esi/TA?format=json&url=%s'
-# Url
-
 URL_LICENSE_FRANCETV = 'https://simulcast-b.ftven.fr/keys/hls.key'
 # URL license
+
+URL_FRANCETV_TOKEN = 'https://hdfauth.ftven.fr/esi/TA'
+# URL token
 
 URL_DAILYMOTION_EMBED_2 = 'https://www.dailymotion.com/player/metadata/video/%s'
 
@@ -480,31 +480,24 @@ def get_mtvnservices_stream(plugin,
     return video_url
 
 
-def get_francetv_program_info(video_id, islive=False):
-    # Move Live TV on the new API
-    geoip_value = web_utils.geoip()
-    if not geoip_value:
-        geoip_value = 'FR'
-    params = {
-        'country_code': geoip_value,
-        'domain': 'www.france.tv',
-        'os': 'android',
-        'diffusion_mode': 'tunnel_first',
-        'capabilities': 'drm',
-    }
-    if islive is False:
-        params.update({'browser': 'firefox', })
-    resp = urlquick.get(URL_FRANCETV_PROGRAM_INFO % video_id, params=params, headers=GENERIC_HEADERS, max_age=-1)
-    return json.loads(resp.text)
-
-
 # FranceTV Part
 # FranceTV, FranceTV Sport, France Info, ...
 def get_francetv_video_stream(plugin,
                               id_diffusion,
                               download_mode=False):
+    geoip_value = web_utils.geoip()
+    if not geoip_value:
+        geoip_value = 'FR'
+    params = {
+        'country_code': geoip_value,
+        'capabilities': 'drm',
+        'os': 'androidtv',
+        'diffusion_mode': 'tunnel_first',
+        'offline': 'false',
+    }
 
-    json_parser = get_francetv_program_info(id_diffusion)
+    resp = urlquick.get(URL_FRANCETV_PROGRAM_INFO % id_diffusion, params=params, headers=GENERIC_HEADERS, max_age=-1)
+    json_parser = json.loads(resp.text)
 
     if 'video' not in json_parser:
         plugin.notify('ERROR', plugin.localize(30716))
@@ -518,7 +511,7 @@ def get_francetv_video_stream(plugin,
     elif "drm" in video_datas['token']:
         url_token = video_datas['token']['drm']
     else:
-        url_token = 'https://hdfauth.ftven.fr/esi/TA'
+        url_token = URL_FRANCETV_TOKEN
 
     params = {
         'format': 'json',
@@ -541,8 +534,13 @@ def get_francetv_video_stream(plugin,
 
         # DRM video
         if video_datas['drm'] is True:
-            final_video_url = urlquick.get('https://hdfauth.ftven.fr/esi/TA', params=params, headers=GENERIC_HEADERS, max_age=-1).json()['url']
-            token = urlquick.post(url_token, headers=headers, json={"id": id_diffusion, "drm_type": "widevine", "license_type": "online"}).json()['token']
+            final_video_url = urlquick.get(URL_FRANCETV_TOKEN, params=params, headers=GENERIC_HEADERS, max_age=-1).json()['url']
+            data_json = {
+                "id": id_diffusion,
+                "drm_type": "widevine",
+                "license_type": "online"
+            }
+            token = urlquick.post(url_token, headers=headers, json=data_json).json()['token']
             license_headers = {
                 'User-Agent': web_utils.get_random_windows_ua(),
                 'nv-authorizations': token,
@@ -572,8 +570,18 @@ def get_francetv_video_stream(plugin,
 
 
 def get_francetv_live_stream(plugin, broadcast_id):
-
-    json_parser = get_francetv_program_info(broadcast_id, islive=True)
+    geoip_value = web_utils.geoip()
+    if not geoip_value:
+        geoip_value = 'FR'
+    params = {
+        'country_code': geoip_value,
+        'capabilities': 'drm',
+        'os': 'androidtv',
+        'diffusion_mode': 'tunnel_first',
+        'offline': 'false',
+    }
+    resp = urlquick.get(URL_FRANCETV_PROGRAM_INFO % broadcast_id, params=params, headers=GENERIC_HEADERS, max_age=-1)
+    json_parser = json.loads(resp.text)
 
     if 'video' not in json_parser:
         plugin.notify('ERROR', plugin.localize(30716))
@@ -585,7 +593,7 @@ def get_francetv_live_stream(plugin, broadcast_id):
     elif "drm" in video_datas['token']:
         url_token = video_datas['token']['drm']
     else:
-        url_token = 'https://hdfauth.ftven.fr/esi/TA'
+        url_token = URL_FRANCETV_TOKEN
 
     params = {
         'format': 'json',
