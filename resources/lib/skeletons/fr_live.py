@@ -458,6 +458,15 @@ menu = {
         'enabled': True,
         'order': 39
     },
+    'tv8montblanc': {
+        'resolver': '/resources/lib/channels/fr/tv8montblanc:get_live_url',
+        'label': '8 Mont-Blanc',
+        'thumb': 'channels/fr/tv8montblanc.png',
+        'fanart': 'channels/fr/tv8montblanc_fanart.jpg',
+        'm3u_group': 'Région',
+        'enabled': True,
+        'order': 40
+    },
     'albitv': {
         'resolver': '/resources/lib/channels/fr/albitv:get_live_url',
         'label': 'Albi TV',
@@ -465,7 +474,7 @@ menu = {
         'fanart': 'channels/fr/albitv_fanart.jpg',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 40
+        'order': 41
     },
     'biptv': {
         'resolver': '/resources/lib/channels/fr/biptv:get_live_url',
@@ -474,7 +483,7 @@ menu = {
         'fanart': 'channels/fr/biptv_fanart.jpg',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 41
+        'order': 42
     },
     'dicitv': {
         'resolver': '/resources/lib/channels/fr/dicitv:get_live_url',
@@ -483,7 +492,7 @@ menu = {
         'fanart': 'channels/fr/dicitv_fanart.jpg',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 42
+        'order': 43
     },
     'figarotv': {
         'resolver': '/resources/lib/channels/fr/figarotv:get_live_url',
@@ -492,7 +501,7 @@ menu = {
         'fanart': 'channels/fr/figarotv_ile_de_france_fanart.png',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 43
+        'order': 44
     },
     '20minutes': {
         'resolver': '/resources/lib/channels/fr/20minutes:get_live_url',
@@ -501,7 +510,7 @@ menu = {
         'fanart': 'channels/fr/20minutes_fanart.jpg',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 44
+        'order': 45
     },
     'lmtv': {
         'resolver': '/resources/lib/channels/fr/lmtv:get_live_url',
@@ -511,7 +520,7 @@ menu = {
         'xmltv_id': 'C535.api.telerama.fr',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 45
+        'order': 46
     },
     'mblivetv': {
         'resolver': '/resources/lib/channels/fr/mblivetv:get_live_url',
@@ -521,7 +530,7 @@ menu = {
         'xmltv_id': 'C421.api.telerama.fr',
         'm3u_group': 'Satellite/FAI',
         'enabled': False,
-        'order': 46
+        'order': 47
     },
     'moselletv': {
         'resolver': '/resources/lib/channels/fr/moselletv:get_live_url',
@@ -531,7 +540,7 @@ menu = {
         'xmltv_id': 'C1045.api.telerama.fr',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 47
+        'order': 48
     },
     'tebeo': {
         'resolver': '/resources/lib/channels/fr/tebeo:get_live_url',
@@ -540,7 +549,7 @@ menu = {
         'fanart': 'channels/fr/tebeo_fanart.jpg',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 48
+        'order': 49
     },
     'tebesud': {
         'resolver': '/resources/lib/channels/fr/tebeo:get_live_url',
@@ -549,7 +558,7 @@ menu = {
         'fanart': 'channels/fr/tebesud_fanart.jpg',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 49
+        'order': 50
     },
     'telegrenoble': {
         'resolver': '/resources/lib/channels/fr/telegrenoble:get_live_url',
@@ -558,7 +567,7 @@ menu = {
         'fanart': 'channels/fr/telegrenoble_fanart.jpg',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 50
+        'order': 51
     },
     'telenantes': {
         'resolver': '/resources/lib/channels/fr/telenantes:get_live_url',
@@ -568,7 +577,7 @@ menu = {
         'xmltv_id': 'C491.api.telerama.fr',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 51
+        'order': 52
     },
     'tl7': {
         'resolver': '/resources/lib/channels/fr/tl7:get_live_url',
@@ -577,7 +586,7 @@ menu = {
         'fanart': 'channels/fr/tl7_fanart.jpg',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 52
+        'order': 53
     },
     'tlc': {
         'resolver': '/resources/lib/channels/fr/tlc:get_live_url',
@@ -586,7 +595,7 @@ menu = {
         'fanart': 'channels/fr/tlc_fanart.jpg',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 53
+        'order': 54
     },
     'tv7bordeaux': {
         'resolver': '/resources/lib/channels/fr/tv7bordeaux:get_live_url',
@@ -596,22 +605,13 @@ menu = {
         'xmltv_id': 'C273.api.telerama.fr',
         'm3u_group': 'Région',
         'enabled': True,
-        'order': 54
+        'order': 55
     },
     'tv7colmar': {
         'resolver': '/resources/lib/channels/fr/tv7colmar:get_live_url',
         'label': 'TV7 Colmar',
         'thumb': 'channels/fr/tv7colmar.png',
         'fanart': 'channels/fr/tv7colmar_fanart.jpg',
-        'm3u_group': 'Région',
-        'enabled': True,
-        'order': 55
-    },
-    'tv8montblanc': {
-        'resolver': '/resources/lib/channels/fr/tv8montblanc:get_live_url',
-        'label': '8 Mont-Blanc',
-        'thumb': 'channels/fr/tv8montblanc.png',
-        'fanart': 'channels/fr/tv8montblanc_fanart.jpg',
         'm3u_group': 'Région',
         'enabled': True,
         'order': 56
