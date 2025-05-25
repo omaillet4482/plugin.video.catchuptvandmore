@@ -5,7 +5,7 @@
 # This file is part of Catch-up TV & More
 
 from __future__ import unicode_literals
-import re
+import json
 
 # noinspection PyUnresolvedReferences
 from codequick import Resolver
@@ -16,13 +16,16 @@ from resources.lib import resolver_proxy, web_utils
 # TODO
 # Add Replay
 
-URL_LIVE = "https://panamericana.pe/tvenvivo/"
+URL_API = "https://kick.com/api/v2/channels/ptv5/livestream"
 
 
 @Resolver.register
 def get_live_url(plugin, item_id, **kwargs):
-    resp = urlquick.get(URL_LIVE, headers={"User-Agent": web_utils.get_random_ua()}, max_age=-1)
+    headers = {
+        "User-Agent": web_utils.get_random_ua(),
+        'Referer': 'https://player.kick.com/'
+    }
+    resp = urlquick.get(URL_API, headers=headers, max_age=-1)
+    video_url = json.loads(resp.text)['data']['playback_url']
 
-    live_id = re.compile(r'video\: \"(.*?)\"').findall(resp.text)[0]
-    print('live_id = %s' % live_id)
-    return resolver_proxy.get_stream_dailymotion(plugin, live_id, False)
+    return resolver_proxy.get_stream_with_quality(plugin, video_url)
