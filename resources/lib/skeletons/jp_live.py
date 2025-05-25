@@ -25,12 +25,20 @@ menu = {
         'enabled': True,
         'order': 1
     },
+    'qvc': {
+        'resolver': '/resources/lib/channels/jp/qvc:get_live_url',
+        'label': 'QVC',
+        'thumb': 'channels/jp/qvc.png',
+        'fanart': 'channels/jp/qvc_fanart.jpg',
+        'enabled': True,
+        'order': 2
+    },
     'weathernewsjp': {
         'resolver': '/resources/lib/channels/jp/weathernewsjp:get_live_url',
         'label': '株式会社ウェザーニューズ',
         'thumb': 'channels/jp/weathernewsjp.png',
         'fanart': 'channels/jp/weathernewsjp_fanart.jpg',
         'enabled': True,
-        'order': 2
+        'order': 3
     }
 }
