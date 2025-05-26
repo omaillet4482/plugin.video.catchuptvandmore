@@ -420,8 +420,8 @@ def get_brightcove_video_json(plugin,
         for url in json_parser["sources"]:
             # Prefer non-drmed hls videos
             if 'src' in url:
-                video_url = url["src"]
                 if ('key_systems' not in url):
+                    video_url = url["src"]
                     if ('m3u8' in url["src"]) or ('container' in url):
                         manifest = 'hls'
                         break
@@ -430,6 +430,7 @@ def get_brightcove_video_json(plugin,
                         found_non_drm = True
                 else:
                     if (not found_non_drm) and ('com.widevine.alpha' in url["key_systems"]):
+                        video_url = url["src"]
                         license_url = url['key_systems']['com.widevine.alpha']['license_url']
                         if ('m3u8' in url["src"]) or ('container' in url):
                             manifest = 'hls'
