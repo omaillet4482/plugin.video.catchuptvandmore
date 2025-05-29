@@ -132,29 +132,13 @@ menu = {
         'enabled': True,
         'order': 13
     },
-    'petcollective': {
-        'resolver': '/resources/lib/channels/uk/petcollective:get_live_url',
-        'label': 'The Pet Collective',
-        'thumb': 'channels/uk/thepetcollective.png',
-        'fanart': 'channels/uk/thepetcollective_fanart.jpg',
-        'enabled': True,
-        'order': 14
-    },
-    'failarmy': {
-        'resolver': '/resources/lib/channels/uk/failarmy:get_live_url',
-        'label': 'Fail Army',
-        'thumb': 'channels/uk/failarmy.png',
-        'fanart': 'channels/uk/failarmy_fanart.jpg',
-        'enabled': True,
-        'order': 15
-    },
     'dust': {
         'resolver': '/resources/lib/channels/uk/stv:get_live_url',
         'label': 'DUST',
         'thumb': 'channels/uk/dust.png',
         'fanart': 'channels/uk/dust_fanart.jpg',
         'enabled': True,
-        'order': 16
+        'order': 14
     },
     'C4': {
         'resolver': '/resources/lib/channels/uk/channel4:get_live_url',
@@ -162,7 +146,7 @@ menu = {
         'thumb': 'channels/uk/channel4.png',
         'fanart': 'channels/uk/channel4_fanart.jpg',
         'enabled': True,
-        'order': 17
+        'order': 15
     },
     'E4': {
         'resolver': '/resources/lib/channels/uk/channel4:get_live_url',
@@ -170,7 +154,7 @@ menu = {
         'thumb': 'channels/uk/E4.png',
         'fanart': 'channels/uk/E4_fanart.jpg',
         'enabled': True,
-        'order': 18
+        'order': 16
     },
     'M4': {
         'resolver': '/resources/lib/channels/uk/channel4:get_live_url',
@@ -178,7 +162,7 @@ menu = {
         'thumb': 'channels/uk/More4.png',
         'fanart': 'channels/uk/More4_fanart.jpg',
         'enabled': True,
-        'order': 19
+        'order': 17
     },
     'F4': {
         'resolver': '/resources/lib/channels/uk/channel4:get_live_url',
@@ -186,7 +170,7 @@ menu = {
         'thumb': 'channels/uk/Film4.png',
         'fanart': 'channels/uk/Film4_fanart.jpg',
         'enabled': True,
-        'order': 20
+        'order': 18
     },
     '4S': {
         'resolver': '/resources/lib/channels/uk/channel4:get_live_url',
@@ -194,7 +178,7 @@ menu = {
         'thumb': 'channels/uk/4seven.png',
         'fanart': 'channels/uk/4seven_fanart.jpg',
         'enabled': True,
-        'order': 21
+        'order': 19
     },
     'birminghamlocal': {
         'resolver': '/resources/lib/channels/uk/uklocaltv:get_live_url',
@@ -203,7 +187,7 @@ menu = {
         'fanart': 'channels/uk/birminghamlocal_fanart.jpg',
         'xmltv_id': '1154.tvguide.co.uk',
         'enabled': True,
-        'order': 22
+        'order': 20
     },
     'bristollocal': {
         'resolver': '/resources/lib/channels/uk/uklocaltv:get_live_url',
@@ -212,7 +196,7 @@ menu = {
         'fanart': 'channels/uk/bristollocal_fanart.jpg',
         'xmltv_id': '1157.tvguide.co.uk',
         'enabled': True,
-        'order': 23
+        'order': 21
     },
     'cardifflocal': {
         'resolver': '/resources/lib/channels/uk/uklocaltv:get_live_url',
@@ -221,7 +205,7 @@ menu = {
         'fanart': 'channels/uk/cardifflocal_fanart.jpg',
         'xmltv_id': '1171.tvguide.co.uk',
         'enabled': True,
-        'order': 24
+        'order': 22
     },
     'leedslocal': {
         'resolver': '/resources/lib/channels/uk/uklocaltv:get_live_url',
@@ -230,7 +214,7 @@ menu = {
         'fanart': 'channels/uk/leedslocal_fanart.jpg',
         'xmltv_id': '1210.tvguide.co.uk',
         'enabled': True,
-        'order': 25
+        'order': 23
     },
     'liverpoollocal': {
         'resolver': '/resources/lib/channels/uk/uklocaltv:get_live_url',
@@ -239,7 +223,7 @@ menu = {
         'fanart': 'channels/uk/liverpoollocal_fanart.jpg',
         'xmltv_id': '1212.tvguide.co.uk',
         'enabled': True,
-        'order': 36
+        'order': 24
     },
     'northwaleslocal': {
         'resolver': '/resources/lib/channels/uk/uklocaltv:get_live_url',
@@ -247,7 +231,7 @@ menu = {
         'thumb': 'channels/uk/northwaleslocal.png',
         'fanart': 'channels/uk/northwaleslocal_fanart.jpg',
         'enabled': True,
-        'order': 27
+        'order': 25
     },
     'teessidelocal': {
         'resolver': '/resources/lib/channels/uk/uklocaltv:get_live_url',
@@ -255,7 +239,7 @@ menu = {
         'thumb': 'channels/uk/teessidelocal.png',
         'fanart': 'channels/uk/teessidelocal_fanart.jpg',
         'enabled': True,
-        'order': 28
+        'order': 26
     },
     'twlocal': {
         'resolver': '/resources/lib/channels/uk/uklocaltv:get_live_url',
@@ -264,7 +248,7 @@ menu = {
         'fanart': 'channels/uk/twlocal_fanart.jpg',
         'xmltv_id': '1255.tvguide.co.uk',
         'enabled': True,
-        'order': 29
+        'order': 27
     },
     'really': {
         'resolver': '/resources/lib/channels/uk/discoveryplus:get_live_url',
@@ -273,7 +257,7 @@ menu = {
         'fanart': 'channels/uk/really_fanart.jpg',
         'xmltv_id': '422.tvguide.co.uk',
         'enabled': False,
-        'order': 30
+        'order': 28
     },
     'food-network': {
         'resolver': '/resources/lib/channels/uk/discoveryplus:get_live_url',
@@ -282,7 +266,7 @@ menu = {
         'fanart': 'channels/uk/foodnetwork_fanart.jpg',
         'xmltv_id': '596.tvguide.co.uk',
         'enabled': False,
-        'order': 31
+        'order': 29
     },
     'dmax': {
         'resolver': '/resources/lib/channels/uk/discoveryplus:get_live_url',
@@ -291,7 +275,7 @@ menu = {
         'fanart': 'channels/uk/dmax_fanart.jpg',
         'xmltv_id': '454.tvguide.co.uk',
         'enabled': False,
-        'order': 32
+        'order': 30
     },
     'home': {
         'resolver': '/resources/lib/channels/uk/discoveryplus:get_live_url',
@@ -299,7 +283,7 @@ menu = {
         'thumb': 'channels/uk/hgtv.png',
         'fanart': 'channels/uk/hgtv_fanart.jpg',
         'enabled': False,
-        'order': 33
+        'order': 31
     },
     'quest': {
         'resolver': '/resources/lib/channels/uk/discoveryplus:get_live_url',
@@ -308,7 +292,7 @@ menu = {
         'fanart': 'channels/uk/questtv_fanart.jpg',
         'xmltv_id': '559.tvguide.co.uk',
         'enabled': False,
-        'order': 34
+        'order': 32
     },
     'quest-red': {
         'resolver': '/resources/lib/channels/uk/discoveryplus:get_live_url',
@@ -317,7 +301,7 @@ menu = {
         'fanart': 'channels/uk/questred_fanart.jpg',
         'xmltv_id': '1014.tvguide.co.uk',
         'enabled': False,
-        'order': 35
+        'order': 33
     },
     'C5': {
         'resolver': '/resources/lib/channels/uk/my5:get_live_url',
@@ -325,7 +309,7 @@ menu = {
         'thumb': 'channels/uk/five.png',
         'fanart': 'channels/uk/five_fanart.jpg',
         'enabled': True,
-        'order': 36
+        'order': 34
     },
     'C6': {
         'resolver': '/resources/lib/channels/uk/my5:get_live_url',
@@ -333,7 +317,7 @@ menu = {
         'thumb': 'channels/uk/fivestar.png',
         'fanart': 'channels/uk/fivestar_fanart.jpg',
         'enabled': True,
-        'order': 37
+        'order': 35
     },
     'C7': {
         'resolver': '/resources/lib/channels/uk/my5:get_live_url',
@@ -341,7 +325,7 @@ menu = {
         'thumb': 'channels/uk/fiveusa.png',
         'fanart': 'channels/uk/fiveusa_fanart.jpg',
         'enabled': True,
-        'order': 38
+        'order': 36
     },
     'C0': {
         'resolver': '/resources/lib/channels/uk/my5:get_live_url',
@@ -349,7 +333,7 @@ menu = {
         'thumb': 'channels/uk/5action.png',
         'fanart': 'channels/uk/5action_fanart.jpg',
         'enabled': True,
-        'order': 39
+        'order': 37
     },
     'C8': {
         'resolver': '/resources/lib/channels/uk/my5:get_live_url',
@@ -357,6 +341,6 @@ menu = {
         'thumb': 'channels/uk/5select.png',
         'fanart': 'channels/uk/5select_fanart.jpg',
         'enabled': True,
-        'order': 40
+        'order': 38
     },
 }
