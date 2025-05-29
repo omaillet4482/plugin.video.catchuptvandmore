@@ -132,8 +132,8 @@ menu = {
         'enabled': True,
         'order': 13
     },
-    'thepetcollective': {
-        'resolver': '/resources/lib/channels/uk/stv:get_live_url',
+    'petcollective': {
+        'resolver': '/resources/lib/channels/uk/petcollective:get_live_url',
         'label': 'The Pet Collective',
         'thumb': 'channels/uk/thepetcollective.png',
         'fanart': 'channels/uk/thepetcollective_fanart.jpg',
