@@ -141,7 +141,7 @@ menu = {
         'order': 14
     },
     'failarmy': {
-        'resolver': '/resources/lib/channels/uk/stv:get_live_url',
+        'resolver': '/resources/lib/channels/uk/failarmy:get_live_url',
         'label': 'Fail Army',
         'thumb': 'channels/uk/failarmy.png',
         'fanart': 'channels/uk/failarmy_fanart.jpg',
