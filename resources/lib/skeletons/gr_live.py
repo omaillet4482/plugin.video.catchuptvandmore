@@ -41,9 +41,9 @@ menu = {
         'enabled': True,
         'order': 3
     },
-    'eptsport': {
+    'eptsport1': {
         'resolver': '/resources/lib/channels/gr/ept:get_live_url',
-        'label': 'EPT Sport',
+        'label': 'EPT Sport 1',
         'thumb': 'channels/gr/eptsport.png',
         'fanart': 'channels/gr/eptsport_fanart.jpg',
         'enabled': True,
