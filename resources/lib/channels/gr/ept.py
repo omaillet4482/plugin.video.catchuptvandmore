@@ -28,7 +28,9 @@ def get_live_url(plugin, item_id, **kwargs):
         "ept1": "ept1-live",
         "ept2": "ept2-live",
         "ept3": "ept3-live-2",
-        "eptsport1": "ert-sports-live-ww"
+        "eptsport1": "ert-sports-live-ww",
+        "eptsport2": "ert-sports-2-live-ww",
+        "eptkids": "ert-kids-live",
     }
 
     params = {
