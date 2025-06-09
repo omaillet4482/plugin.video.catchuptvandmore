@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta11" provider-name="SylvainCecchetto,wwark,joaopa">
+<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta12" provider-name="SylvainCecchetto,wwark,joaopa">
   <requires>
     <!-- xbmc.python -->
     <import addon="script.module.codequick" version="0.9.13"/>
@@ -87,6 +87,9 @@
 [WO - EPTWORLD] Fix live (issue #1327)
 [GR - EPT] Add some channels
 [WO - AFRICA24] Fix live
+[FR] Add t18 live (PR #1522 issue #1520) thanks @jeff2900
+[FR] Add Novo19 skeleton (PR #1522 issue #1520) thanks @jeff2900
+[FR] Sort live skeleton by TNT order (PR #1522 issue #1520) thanks @jeff2900
 ----
 Visit WebSite - http://mpdb.tv/#home which host the french forum used by users of CU TV and More
     </news>
