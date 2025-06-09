@@ -882,5 +882,14 @@ menu = {
         'fanart': 'channels/fr/paris_h24_fanart.jpg',
         'enabled': True,
         'order': 84
+    },
+    't18': {
+        'resolver': '/resources/lib/channels/fr/t18:get_live_url',
+        'label': 'T18',
+        'thumb': 'channels/fr/t18.png',
+        'fanart': 'channels/fr/t18_fanart.png',
+        'xmltv_id': 'C4139.api.telerama.fr',
+        'enabled': True,
+        'order': 85
     }
 }
