@@ -891,5 +891,14 @@ menu = {
         'xmltv_id': 'C4139.api.telerama.fr',
         'enabled': True,
         'order': 85
+    },
+    'novo19': {
+        'resolver': '/resources/lib/channels/fr/novo19:get_live_url',
+        'label': 'NOVO19',
+        'thumb': 'channels/fr/novo19.png',
+        'fanart': 'channels/fr/novo19_fanart.png',
+        'xmltv_id': '',
+        'enabled': False,
+        'order': 19
     }
 }
