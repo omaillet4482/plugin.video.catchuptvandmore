@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta13" provider-name="SylvainCecchetto,wwark,joaopa">
+<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta14" provider-name="SylvainCecchetto,wwark,joaopa">
   <requires>
     <!-- xbmc.python -->
     <import addon="script.module.codequick" version="0.9.13"/>
@@ -93,6 +93,8 @@
 [FR - FRANCETV] Fix live missing channel_id (PR #1523) thanks @jeff2900
 [FR - FRANCETV] Fix replay drm (PR #1524) thanks @jeff2900
 [FR - FRANCETV] Fix replay items no found (PR #1526 issue #1519) thanks @jeff2900
+[BE - RTLPLAYBE] Replay Fix KeyError: 'lfvp_auth_token' (PR #1534] thanks @jeff2900
+[WO - ARTE] Replay add Search (PR #1541) thanks @jeff2900
 ----
 Visit WebSite - http://mpdb.tv/#home which host the french forum used by users of CU TV and More
     </news>
