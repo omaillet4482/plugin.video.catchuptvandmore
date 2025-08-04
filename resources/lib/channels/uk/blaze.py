@@ -46,13 +46,13 @@ def list_categories(plugin, item_id, **kwargs):
     root = resp.parse()
 
     for video_datas in root.iterfind(
-            ".//div[@class='slider-card card bg-transparent border-0 "
-            "rounded position-relative mb-0 card-default']"):
+            ".//div[@class='col-auto layout-carousel-column']"):
 
         video_title = ''
-        if video_datas.find('.//img') is not None:
-            video_title = video_datas.find('.//img').get('alt')
-        video_image = video_datas.find('.//img').get('src')
+        for video_image_data in video_datas.iterfind('.//img') :
+            if video_image_data.get('alt') != 'Logo':
+                video_title = video_image_data.get('alt')
+                video_image = video_image_data.get('src')
         xdata = video_datas.find('.//a').get('x-data')
         video_id = re.compile(r"href\:\ \'(.*?)\'").findall(xdata)[0]
 
