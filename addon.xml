@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta15" provider-name="SylvainCecchetto,wwark,joaopa">
+<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta16" provider-name="SylvainCecchetto,wwark,joaopa">
   <requires>
     <!-- xbmc.python -->
     <import addon="script.module.codequick" version="0.9.13"/>
@@ -98,6 +98,12 @@
 [FR - 6PLAY] Replay add Search (PR #1543) thanks @jeff2900
 [FR - TF1PLUS] Replay add sorting by Seasons (PR #1544) thanks @jeff2900
 [UK - MY5] Fixed replay listings and subtitles (PR #1547) thanks @dimkroon
+[PROJECT] Upate User-Agent (issue #1538)
+[UK - BLAZE] Fix replay (issue #1550)
+[UK - BLAZE] Replay improved plots. (PR #1552) thanks @dimkroon
+[JP - TVER] Fix replay (issue #1549)
+[WO - ARTE] Replay: add next page if more than 20 items (PR #1553) thanks @jeff2900
+[BE - RTLPLAYBE] Fix error 401 after playing video (PR #1554) thanks @jeff2900
 ----
 Visit WebSite - http://mpdb.tv/#home which host the french forum used by users of CU TV and More
     </news>
