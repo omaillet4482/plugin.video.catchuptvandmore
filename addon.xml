@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta18" provider-name="SylvainCecchetto,wwark,joaopa">
+<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta19" provider-name="SylvainCecchetto,wwark,joaopa">
   <requires>
     <!-- xbmc.python -->
     <import addon="script.module.codequick" version="0.9.13"/>
@@ -114,6 +114,9 @@
 [WO - ARTE] Fixed missing videos in category 'courts-metrages' (PR #1567 issue #1466) thanks @jeff2900
 [Project - UK] Add UK-STV EPG (PR #1568) thanks @dimkroon
 [PROJECT] Fix Kodi hangs after error (PR #1569) thanks @dimkroon
+[FR - LCP] Replay fixed IndexError and added search functionality (PR #1572) thanks at jeff2900
+[FR - LCP] Replay fixed video not yet available (PR #1573) thanks @jeff2900
+[FR - NOVO19] Add live and replay features (PR #1575) thanks @jeff2900
 ----
 Visit WebSite - http://mpdb.tv/#home which host the french forum used by users of CU TV and More
     </news>
