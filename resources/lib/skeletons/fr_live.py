@@ -274,7 +274,7 @@ menu = {
         'resolver': '/resources/lib/channels/fr/rmcbfmplay:get_live_url',
         'label': 'RMC Life',
         'thumb': 'channels/fr/rmclife.png',
-        'fanart': 'channels/fr/rmclife_fanart.jpg',
+        'fanart': 'channels/fr/rmclife_fanart.png',
         'xmltv_id': 'C1399.api.telerama.fr',
         'm3u_group': 'TNT',
         'm3u_order': 25,
