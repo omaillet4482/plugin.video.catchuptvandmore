@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta23" provider-name="SylvainCecchetto,wwark,joaopa">
+<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta24" provider-name="SylvainCecchetto,wwark,joaopa">
   <requires>
     <!-- xbmc.python -->
     <import addon="script.module.codequick" version="0.9.13"/>
@@ -130,6 +130,12 @@ UK - WATCHFREEUK] Add new channel (PR #1595 issue #1518) thanks @dimkroon
 UK - MY5] Replay: Keep the 'next page' item on the bottom regardless of sort method (PR #1598) thanks @dimkroon
 [UK - SKY] Replay: Keep the 'next page' item on the bottom regardless of sort method (PR #1598) thanks @dimkroon
 [PROJECT] Workaround some dailymotion.com videos without audio (PR #1597 issue #1563 #1592) thanks @jeff2900
+[BE - RTLPLAYBE] Update to API 22 and improve login (PR #1604) thanks @jeff2900
+[UK - STV] Add STV+1 (PR #1611) thanks @CasperMcFadden95
+[UK - STV] Use 1080p live streams if available (PR #1610 issue #1609) thanks @CasperMcFadden95
+[UK - CHANNEL4] Expose 1080p live streams (PR #1612 issue #1606) thanks @CasperMcFadden95
+[PROJECT] Disable broken UK live channels (PR #1613) thanks @CasperMcFadden95
+[LU - RTL] Corrected the path to channel URL for Luxembourg's RTL channels (PR #1614) thanks @qvalette
 ----
 Visit WebSite - http://mpdb.tv/#home which host the french forum used by users of CU TV and More
     </news>
