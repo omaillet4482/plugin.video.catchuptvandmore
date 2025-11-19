@@ -17,7 +17,6 @@ from kodi_six import xbmcvfs
 import requests
 from codequick import Listitem, Script, Resolver, Route
 import urlquick
-from urllib.parse import urlparse, urlunparse
 
 from resources.lib.kodi_utils import get_kodi_version, get_selected_item_art, get_selected_item_label, get_selected_item_info, INPUTSTREAM_PROP
 from resources.lib.menu_utils import item_post_treatment
@@ -59,16 +58,6 @@ KEYS = {
         'iv': 'odzcU3WdUiXLucVd'
     }
 }
-
-
-def remove_params(url):
-    try:
-        if url:
-            parsed_url = urlparse(url)
-            return urlunparse(parsed_url._replace(query=''))
-    except Exception:
-        pass
-    return url
 
 
 def get_token_if_valid(channel4_auth):
@@ -198,7 +187,7 @@ def do_search(plugin, search_query):
                         item = Listitem()
                         item.label = brand.get("title")
                         thumbnail_url = brand.get("thumbnailUrl")
-                        thumbnail_url = remove_params(thumbnail_url)  # Remove params lowering resolution
+                        thumbnail_url = web_utils.remove_params(thumbnail_url)  # Remove params lowering resolution
                         item.art['thumb'] = item.art['landscape'] = item.art['fanart'] = thumbnail_url
                         url = brand.get("href")
                         plot = brand.get("description")
