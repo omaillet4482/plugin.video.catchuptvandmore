@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta26" provider-name="SylvainCecchetto,wwark,joaopa">
+<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta27" provider-name="SylvainCecchetto,wwark,joaopa">
   <requires>
     <!-- xbmc.python -->
     <import addon="script.module.codequick" version="0.9.13"/>
@@ -149,6 +149,17 @@ UK - MY5] Replay: Keep the 'next page' item on the bottom regardless of sort met
 [UK - STV] Make DRM content visible and playable (PR #1631) thanks @CasperMcFadden95
 [UK - Channel4] Add Search (PR #1629) thanks @CasperMcFadden95
 [PROJECT] Update clear_cache method to delete *.json files (PR #1628) thanks @CasperMcFadden95
+[UK - MY5] Replay: Major rework with new entry page (PR #1633) thanks @dimkroon
+[PROJECT] Short EPG in live plots (PR #1634) thanks @dimkroon
+[PROJECT] Different colour for 'now playing' in live items (PR #1634) thanks @dimkroon
+[UK - MY5] Account sign in/out (PR #1637) thanks @dimkroon
+[UK - MY5] Implement MyList (PR #1637) thanks @dimkroon
+[UK - MY5] Added 'We think you'll like' (PR #1637) thanks @dimkroon
+[UK - CHANNEL4] Prioritise webvtt subtitles as they contain colour (PR #1640) thanks @CasperMcFadden95
+[SA] Add Shahid (PR #1639) thanks @CasperMcFadden95
+PROJECT] Direct urls to github xmltv files (PR #1641) thanks @dimkroon
+PROJECT] Fix translations (PR #1642) thanks @dimkroon
+[UK - CHANNEL4] Add more item metadata (PR #1643) thanks @CasperMcFadden95
 ----
 Visit WebSite - http://mpdb.tv/#home which host the french forum used by users of CU TV and More
     </news>
