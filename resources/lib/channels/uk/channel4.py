@@ -20,6 +20,7 @@ import urlquick
 
 from resources.lib.kodi_utils import get_kodi_version, get_selected_item_art, get_selected_item_label, get_selected_item_info, INPUTSTREAM_PROP
 from resources.lib.menu_utils import item_post_treatment
+from resources.lib.py_utils import datetime_strptime
 
 from resources.lib import resolver_proxy, web_utils
 
@@ -265,6 +266,17 @@ def get_media_type(programme_type):
     return 'video'
 
 
+def extract_yyyy_mm_dd_date_str(date_label):
+    try:
+        if date_label:
+            date_str = date_label.replace("First shown: ", "").strip()
+            date_obj = datetime_strptime(date_str, "%a %d %b %Y")
+            return date_obj.strftime("%Y-%m-%d")
+    except Exception:
+        pass
+    return None
+
+
 @Route.register
 def list_categories(plugin, **kwargs):
     html_text = urlquick.get(URL_CATEGORIES, headers=BASIC_HEADERS, max_age=-1).parse()
@@ -381,8 +393,8 @@ def list_seasons(plugin, url, **kwargs):
                         item.info['plot'] = episode['summary']
                         if 'guidance' in episode and episode['guidance']:
                             item.info['plot'] = item.info['plot'] + '\n\n' + episode['guidance']
-                        if 'bottomText' in episode and episode['bottomText']:
-                            item.info['plot'] = item.info['plot'] + '\n\n' + episode['bottomText']
+                        yyyy_mm_dd_date_str = extract_yyyy_mm_dd_date_str(episode.get('dateLabel'))
+                        item.info.date(yyyy_mm_dd_date_str, '%Y-%m-%d')
                         if 'durationLabel' in episode and episode['durationLabel']:
                             try:
                                 item.info['duration'] = int(episode['durationLabel'].split()[0]) * 60
@@ -405,8 +417,6 @@ def list_seasons(plugin, url, **kwargs):
                     item.art['fanart'] = fanart
                     item.set_callback(get_episodes_list, series, series_number, datas)
                     item.info['plot'] = season['summary']
-                    if 'bottomText' in season and season['bottomText']:
-                        item.info['plot'] = item.info['plot'] + '\n\n' + season['bottomText']
                     item.info['genre'] = genres
                     item.info['mediatype'] = 'season'
                     item.info['season'] = series_number
@@ -437,8 +447,8 @@ def get_episodes_list(plugin, series, series_number, datas, **kwargs):
             item.info['plot'] = episode['summary']
             if 'guidance' in episode and episode['guidance']:
                 item.info['plot'] = item.info['plot'] + '\n\n' + episode['guidance']
-            if 'bottomText' in episode and episode['bottomText']:
-                item.info['plot'] = item.info['plot'] + '\n\n' + episode['bottomText']
+            yyyy_mm_dd_date_str = extract_yyyy_mm_dd_date_str(episode.get('dateLabel'))
+            item.info.date(yyyy_mm_dd_date_str, '%Y-%m-%d')
             if 'durationLabel' in episode and episode['durationLabel']:
                 try:
                     item.info['duration'] = int(episode['durationLabel'].split()[0]) * 60
