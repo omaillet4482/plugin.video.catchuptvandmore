@@ -97,4 +97,12 @@ menu = {
         "enabled": True,
         "order": 10,
     },
+    "greatplayer": {
+        "route": "/resources/lib/channels/uk/greatplayer:main_menu",
+        "label": "Great! Player",
+        "thumb": "https://235351de.customer.static.core.one.accedo.tv/235351de730a39f0/image/file/01K49NVDE1HH2MACRW1MFTFDA4",
+        "fanart": "https://235351de.customer.static.core.one.accedo.tv/235351de730a39f0/image/file/01K49NVDE1HH2MACRW1MFTFDA4",
+        "enabled": True,
+        "order": 11,
+    },
 }
