@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta28" provider-name="SylvainCecchetto,wwark,joaopa">
+<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta29" provider-name="SylvainCecchetto,wwark,joaopa">
   <requires>
     <!-- xbmc.python -->
     <import addon="script.module.codequick" version="0.9.13"/>
@@ -172,6 +172,11 @@ PROJECT] Fix translations (PR #1642) thanks @dimkroon
 [SA - Shahid] Fix error userMessage not being displayed to user (PR #1652) thanks @CasperMcFadden95
 [UK - Channel 4] Don't set date if None (PR #1653) thanks @CasperMcFadden95
 [UK - CHANNEL4] Get anonymous token to allow for higher quality VOD without credentials (PR #1653) thanks @CasperMcFadden95
+[UK - Channel 4] Use amazonfire-dash api for live to avoid url hack (PR #1655) thanks @CasperMcFadden95
+[FR - 6PLAY] Fixed login error (PR #1657 issue #1656) thanks @jeff2900
+[UK - CHANNEL4] Revert Get anonymous token to allow for higher quality VOD without credentials (PR #1661 issue 1659) thanks @CasperMcFadden95
+[UK - MY5] report_play_time should not show msg on fail (PR #1662) thanks @CasperMcFadden95
+[FR - TELEPAESE] Fix live
 ----
 Visit WebSite - http://mpdb.tv/#home which host the french forum used by users of CU TV and More
     </news>
