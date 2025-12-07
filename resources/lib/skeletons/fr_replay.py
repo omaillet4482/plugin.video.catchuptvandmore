@@ -383,12 +383,4 @@ menu = {
         "enabled": True,
         "order": 45,
     },
-    "j_one": {
-        "route": "/resources/lib/channels/fr/j_one:list_videos",
-        "label": "J-One",
-        "thumb": "channels/fr/jone.png",
-        "fanart": "channels/fr/jone_fanart.jpg",
-        "enabled": True,
-        "order": 46,
-    }
 }
