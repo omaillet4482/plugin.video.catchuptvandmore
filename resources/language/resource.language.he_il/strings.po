@@ -233,6 +233,10 @@ msgctxt "#30077"
 msgid "Saudi Arabia"
 msgstr "ערב הסעודית"
 
+msgctxt "#30078"
+msgid "Macedonia"
+msgstr "מוּקדוֹן"
+
 # Channels (from 30080 to 30129)
 
 msgctxt "#30080"
