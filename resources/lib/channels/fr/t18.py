@@ -14,6 +14,8 @@ from resources.lib import resolver_proxy, web_utils
 
 URL_ROOT = 'https://t18.fr/'
 
+EMBEDER_URL = 'https://www.dailymotion.com/video/%s'
+
 GENERIC_HEADERS = {"User-Agent": web_utils.get_random_ua()}
 
 
@@ -23,6 +25,7 @@ def get_live_url(plugin, item_id, **kwargs):
     try:
         resp = urlquick.get(URL_ROOT, headers=GENERIC_HEADERS, max_age=-1)
         live_id = re.compile(r'"https://geo.dailymotion.com/player.html\?video=(.*?)[\?\"]').findall(resp.text)[0]
-        return resolver_proxy.get_stream_dailymotion(plugin, live_id, download_mode=False, embeder=URL_ROOT)
+        return resolver_proxy.get_stream_dailymotion(plugin, live_id, download_mode=False, embeder=EMBEDER_URL % live_id)
+
     except Exception:
-        resolver_proxy.get_stream_dailymotion(plugin, 'x9jhhyc', False)
+        return resolver_proxy.get_stream_dailymotion(plugin, 'x9jhhyc', False, embeder=EMBEDER_URL % 'x9jhhyc')
