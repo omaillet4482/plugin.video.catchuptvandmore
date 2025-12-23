@@ -139,7 +139,7 @@ menu = {
         "order": 11
     },
     "BFM TV": {
-        "resolver": "/resources/lib/channels/fr/rmcbfmplay:get_live_url",
+        "resolver": "/resources/lib/channels/fr/bfmtv:get_live_url",
         "label": "BFM TV",
         "thumb": "channels/fr/bfmtv.png",
         "fanart": "channels/fr/bfmtv_fanart.jpg",
@@ -396,7 +396,7 @@ menu = {
         "order": 34
     },
     "BFM_regions": {
-        "resolver": "/resources/lib/channels/fr/rmcbfmplay:get_live_url",
+        "resolver": "/resources/lib/channels/fr/bfmtv:get_live_url",
         "label": "BFM Régions",
         "thumb": "channels/fr/bfmregions.png",
         "fanart": "channels/fr/bfmregions_fanart.jpeg",
@@ -404,9 +404,10 @@ menu = {
         "available_languages": {
             "BFM ALSACE": {},
             "BFM DICI HAUTE-PROVENCE": {},
-            "BFM Grand Lille": {},
-            "BFM Grand Littoral": {},
-            "BFM Lyon": {},
+            "BFM DICI ALPES DU SUD": {},
+            "BFM GRAND LILLE": {},
+            "BFM GRAND LITTORAL": {},
+            "BFM LYON": {},
             "BFM MARSEILLE PROVENCE": {},
             "BFM NICE COTE D'AZUR": {},
             "BFM NORMANDIE": {},
