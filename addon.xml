@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta30" provider-name="SylvainCecchetto,wwark,joaopa">
+<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta31" provider-name="SylvainCecchetto,wwark,joaopa">
   <requires>
     <!-- xbmc.python -->
     <import addon="script.module.codequick" version="0.9.13"/>
@@ -210,6 +210,22 @@ PROJECT] Fix translations (PR #1642) thanks @dimkroon
 [UK - SKY] Fix News VOD (PR #1680) thanks @CasperMcFadden95
 [FR - BIPTV] Fix live
 [UK - SKY] Add Time component to date(PR #1682) thanks @CasperMcFadden95
+[FR - TEBEO] Merge Tebeo and Tebesud live and fix it
+[FR - TNTV] Fix live
+[FR - FIGAROTV] Fix live
+[FR] Remove mblivetv
+[FR - TV8MONTBLANC] Fix live
+[FR - 20MINUTES] Fix live
+[FR - LA1ERE] Fix live
+[FR] Remove ATV
+[UK - MY5] Replay: Improve expose full HD (PR #1684) thanks @dimkroon
+[UK - MY5] Live: Make subtitles available by default (PR #1685) thanks @dimkroon
+[UK - WATCHFREEUK] Revert "Fix page legend has no items" (PR #1686) thanks @dimkroon
+[FR] Remove CANAL10
+[FR - BFMTV] Fix BFM locales live (issue #1681)
+[FR - T18] Fix live (issue #1687)
+[UK - CHANNEL4] Replay: fix search without results (PR #1688) thanks @dimkroon
+
 ----
 Visit WebSite - http://mpdb.tv/#home which host the french forum used by users of CU TV and More
     </news>
