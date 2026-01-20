@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta32" provider-name="SylvainCecchetto,wwark,joaopa">
+<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.41~beta33" provider-name="SylvainCecchetto,wwark,joaopa">
   <requires>
     <!-- xbmc.python -->
     <import addon="script.module.codequick" version="0.9.13"/>
@@ -230,6 +230,16 @@ PROJECT] Fix translations (PR #1642) thanks @dimkroon
 [PROJECT] Update README (PR #1692 issue #1603) thanks @CasperMcFadden95
 [TR - BEYAZ] Fix live (PR #1691) thanks @CasperMcFadden95
 [FR - T18] Add replay feature (PR #1694 issue #1693) thanks @jeff2900
+[FR - T18] Removed debug messages (PR #1695) thanks @jeff2900
+[WO - EURONEWS] Add backup resources (PR #1696 issue #1530) thanks @CasperMcFadden95
+[IE] - Add TG4 and Cula4 lives (PR #1692 issue #1603) thanks @CasperMcFadden95
+[WO - DW] Add DW Russian (PR #1697) thanks @CasperMcFadden95
+[FR - SPORTENFRANCE] Fix live
+[FR - TLC] Fix live
+[WO - AFRIQUEMEDIA] Fix live (PR #1698) thanks @CasperMcFadden95
+[WO - ALJAZEERA] Add مباشر 2 (PR #1704) thanks @CasperMcFadden95
+[FR - LCP] Fix live error (PR #1702) thanks @jeff2900
+[PROJECT] Workaround dailymotion.com error 403. Does not use ISA (PR #1703 issue #1700 issue #1701) thanks @jeff2900
 ----
 Visit WebSite - http://mpdb.tv/#home which host the french forum used by users of CU TV and More
     </news>
