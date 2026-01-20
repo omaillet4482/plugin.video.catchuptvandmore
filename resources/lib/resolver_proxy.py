@@ -7,6 +7,8 @@
 from __future__ import unicode_literals
 
 import json
+import urllib.request
+import http.cookiejar
 import re
 from random import randint
 # noinspection PyUnresolvedReferences
@@ -347,42 +349,78 @@ def get_stream_dailymotion(plugin,
     if download_mode:
         url_dailymotion = URL_DAILYMOTION_EMBED % video_id
         return get_stream_default(plugin, url_dailymotion, download_mode)
-    else:
-        if embeder is None:
-            embeder = ''
-        params = {'embedder': embeder}
-        url_dmotion = URL_DAILYMOTION_EMBED_2 % video_id
-        resp = urlquick.get(url_dmotion, headers=GENERIC_HEADERS, params=params, max_age=-1)
-        json_parser = json.loads(resp.text)
 
-        if "qualities" not in json_parser:
-            plugin.notify('ERROR', plugin.localize(30716))
-        elif get_kodi_version() < 22:
-            # Simple workaround to fix no audio with m3u8 tag: #EXT-X-VERSION:7
-            cc = json_parser['qualities']
-            cc = list(cc.items())
-            cc = sorted(cc, key=lambda s: s[0], reverse=True)
-            for source, json_source in cc:
-                source = source.split("@")[0]
-                for item in json_source:
-                    m_url = item.get('url')
-                    if source == "auto":
-                        mbtext = urlquick.get(m_url, headers=GENERIC_HEADERS, max_age=-1).text
-                        mb = re.findall('NAME="([^"]+)",PROGRESSIVE-URI="([^"]+)"', mbtext)
-                        if not mb:
-                            mb = re.findall(r'NAME="([^"]+)".*\n([^\n]+)', mbtext)
-                        mb = sorted([x for x in mb if x[0].isdigit()], key=lambda x: int(x[0]), reverse=True)
-                        for quality, strurl in mb:
-                            quality = quality.split("@")[0]
-                            if int(quality) <= 1080:
-                                strurl = '{0}'.format(strurl.split('#cell')[0])
-                                strurltext = urlquick.get(strurl, headers=GENERIC_HEADERS, max_age=-1).text
-                                xversion = re.findall('#EXT-X-VERSION:(\d+)', strurltext)[0]
-                                if int(xversion) == 7:
-                                    return strurl
+    if embeder is None:
+        embeder = ''
 
-        url = json_parser["qualities"]["auto"][0]["url"]
-        return get_stream_with_quality(plugin, url)
+    # Workaround to fix error 403
+    url_dmotion = URL_DAILYMOTION_EMBED_2 % video_id + '?embedder=%s' % embeder
+    cj = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+
+    headers = [
+        ('User-Agent', web_utils.get_random_windows_ua()),
+        ('Referer', 'https://www.dailymotion.com/'),
+        ('Accept', '*/*'),
+        ('x-cache-internal', 'true'),
+        ('x-cache-max-age', '-1'),
+    ]
+    opener.addheaders = headers
+
+    with opener.open(url_dmotion) as res:
+        json_parser = json.loads(res.read().decode('utf-8'))
+
+    if "qualities" not in json_parser:
+        plugin.notify('ERROR', plugin.localize(30716))
+
+    cc = json_parser['qualities']
+    cc = list(cc.items())
+    cc = sorted(cc, key=lambda s: s[0], reverse=True)
+    for source, json_source in cc:
+        source = source.split("@")[0]
+        for item in json_source:
+            m_url = item.get('url')
+            if source == "auto":
+                req = urllib.request.Request(m_url)
+                for k, v in headers:
+                    req.add_header(k, v)
+                cj.add_cookie_header(req)
+                with opener.open(req) as res:
+                    mbtext = res.read().decode('utf-8')
+
+                mb = re.findall('NAME="([^"]+)",PROGRESSIVE-URI="([^"]+)"', mbtext)
+                if not mb:
+                    mb = re.findall(r'NAME="(\d+).*\n([^\n]+)', mbtext)
+
+                unique_streams = {}
+                for name, url in mb:
+                    if name.isdigit():
+                        res_val = name
+                        if res_val not in unique_streams:
+                            unique_streams[res_val] = url
+                mb = sorted(unique_streams.items(), key=lambda x: int(x[0]), reverse=True)
+                if Quality['BEST'] == plugin.setting.get_string('quality'):
+                    strurl = mb[0][1]
+                    strurl = '{0}'.format(strurl.split('#cell')[0])
+                    return strurl
+                elif Quality['WORST'] == plugin.setting.get_string('quality'):
+                    strurl = mb[len(mb) - 1][1]
+                    strurl = '{0}'.format(strurl.split('#cell')[0])
+                    return strurl
+                elif Quality['DIALOG'] == plugin.setting.get_string('quality'):
+                    stream = []
+                    for quality, strurl in mb:
+                        stream.append(plugin.localize(30184) + quality)
+                    choose_stream = xbmcgui.Dialog().select(Script.localize(30180), stream)
+                    strurl = mb[choose_stream][1]
+                    strurl = '{0}'.format(strurl.split('#cell')[0])
+                    return strurl
+                else:  # DEFAULT
+                    for quality, strurl in mb:
+                        quality = quality.split("@")[0]
+                        if int(quality) <= 1080:
+                            strurl = '{0}'.format(strurl.split('#cell')[0])
+                            return strurl
 
 
 # Vimeo Part

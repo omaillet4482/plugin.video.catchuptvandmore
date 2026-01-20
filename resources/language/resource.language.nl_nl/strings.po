@@ -461,6 +461,10 @@ msgctxt "#30183"
 msgid "Channel4: Programmes: Sort By"
 msgstr ""
 
+msgctxt "#30184"
+msgid "quality: "
+msgstr "kwaliteit: "
+
 msgctxt "#30192"
 msgid "BEST"
 msgstr ""
