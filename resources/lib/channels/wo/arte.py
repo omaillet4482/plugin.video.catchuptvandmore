@@ -9,13 +9,11 @@ from __future__ import unicode_literals
 import json
 import re
 
-import inputstreamhelper
 import urlquick
+# noinspection PyUnresolvedReferences
 from codequick import Listitem, Resolver, Route, Script
+
 from resources.lib import resolver_proxy, web_utils
-from resources.lib.kodi_utils import (INPUTSTREAM_PROP, get_selected_item_art,
-                                      get_selected_item_info,
-                                      get_selected_item_label)
 from resources.lib.menu_utils import item_post_treatment
 
 # TO DO
@@ -23,42 +21,25 @@ from resources.lib.menu_utils import item_post_treatment
 #   Most viewed
 #   Add some videos Arte Concerts
 
-URL_ROOT = 'https://www.arte.tv/%s/'
-# Language
-
-URL_TOKEN = 'https://static-cdn.arte.tv/guide/manifest.js'
-
+URL_ARTE_HOME = 'https://api.arte.tv/api/emac/v4/%s/tv/pages/HOME'
+URL_ARTE_CATEGORIES = 'https://api.arte.tv/api/emac/v4/%s/app/pages/%s'
+URL_ARTE_COLLECTION = 'https://api.arte.tv/api/emac/v4/%s/tv/collections/%s'
+URL_ARTE_PROGRAMS = 'https://api.arte.tv/api/emac/v4/%s/tv/programs/%s'
+URL_ARTE_SEARCH = 'https://api.arte.tv/api/emac/v4/%s/app/pages/SEARCH'
 URL_LIVE_ARTE = 'https://api.arte.tv/api/player/v2/config/%s/LIVE'
 # Langue, ...
 
 # URL_VIDEOS = 'http://www.arte.tv/hbbtvv2/services/web/index.php/OPA/v3/videos/subcategory/%s/page/%s/limit/100/%s'
 # VideosCode, Page, language
 
-URL_VIDEOS_2 = 'http://www.arte.tv/hbbtvv2/services/web/index.php/OPA/v3/videos/collection/%s/%s/%s'
-# VideosCode, Page, language
-
-DESIRED_LANGUAGE = Script.setting['arte.language']
-
-CORRECT_MONTH = {
-    'Jan': '01',
-    'Feb': '02',
-    'Mar': '03',
-    'Apr': '04',
-    'May': '05',
-    'Jun': '06',
-    'Jul': '07',
-    'Aug': '08',
-    'Sep': '09',
-    'Oct': '10',
-    'Nov': '11',
-    'Dec': '12'
+GENERIC_HEADERS = {'User-Agent': web_utils.get_random_ua()}
+ARTE_API_HEADERS = {
+    'user-agent': web_utils.get_random_ua(),
+    'accept': 'application/vnd.api+json',
+    'authorization': 'Bearer YTEwZWE3M2UxMTVmYmRjZmE0YTdmNjA4ZTI2NDczZDU3YjdjYmVmMmRmNGFjOTM3M2RhNTM5ZjIxYmI3NTc1Zg',
 }
 
-
-def extract_json_from_html(url):
-    html = urlquick.get(url).text
-    json_value = re.compile(r'application/json">(.*?)\}<').findall(html)[0]
-    return json.loads(json_value + '}')
+DESIRED_LANGUAGE = Script.setting['arte.language']
 
 
 @Route.register
@@ -70,131 +51,187 @@ def list_categories(plugin, item_id, **kwargs):
     - Informations
     - ...
     """
-    url = URL_ROOT % DESIRED_LANGUAGE.lower()
-    return list_zone(plugin, item_id, url)
+    # Search items
+    item = Listitem.search(list_videos_search)
+    item_post_treatment(item)
+    yield item
 
+    url = URL_ARTE_HOME % DESIRED_LANGUAGE.lower()
+    response = urlquick.get(url, headers=ARTE_API_HEADERS, max_age=-1)
+    json_parser = response.json()
 
-@Route.register
-def list_zone(plugin, item_id, url):
-    j = extract_json_from_html(url)
-    zones = j['props']['pageProps']['initialPage']['zones']
-    for zone in zones:
+    for zone in json_parser['zones']:
         # Avoid empty folders
-        if not zone['data']:
+        if not zone['content']['data']:
             continue
         # Avoid infinite loop
-        if len(zone['data']) == 1 and zone['data'][0]['url'] == url:
+        data_url_dic = zone['content']['data'][0]['url'].split("/")
+        data_url_len = len(data_url_dic)
+        data_url = data_url_dic[data_url_len - 3]
+        zone_url_dic = url.split("/")
+        zone_url_len = len(zone_url_dic)
+        zone_url = zone_url_dic[zone_url_len - 1]
+        if data_url == zone_url:
             continue
 
         item = Listitem()
         item.label = zone['title']
         item.info['plot'] = zone['description']
-
-        item.set_callback(list_data,
-                          item_id=item_id,
-                          url=url,
-                          zone_id=zone['id'])
+        item.set_callback(list_programs, url=url, zone_id=zone['id'])
         item_post_treatment(item)
         yield item
 
 
 @Route.register
-def list_data(plugin, item_id, url, zone_id):
-    j = extract_json_from_html(url)
-    zones = j['props']['pageProps']['initialPage']['zones']
-    for zone in zones:
-        if zone_id == zone['id']:
-            data = zone['data']
-            break
-    for data in zone['data']:
-        title = data['title']
-        if 'subtitle' in data and data['subtitle']:
-            title += ' - ' + data['subtitle']
+def list_zone(plugin, url):
+    response = urlquick.get(url, headers=ARTE_API_HEADERS, max_age=-1)
+    json_parser = response.json()
+
+    for zone in json_parser['zones']:
+        # Avoid empty folders
+        if not zone['content']['data']:
+            continue
+        # Avoid infinite loop
+        data_url_dic = zone['content']['data'][0]['url'].split("/")
+        data_url_len = len(data_url_dic)
+        data_url = data_url_dic[data_url_len - 3]
+        zone_url_dic = url.split("/")
+        zone_url_len = len(zone_url_dic)
+        zone_url = zone_url_dic[zone_url_len - 1]
+        if data_url == zone_url:
+            continue
 
         item = Listitem()
-        item.label = title
-        item.info['plot'] = data.get('shortDescription', None)
-
-        images = data['images']
-        thumb = None
-        fanart = None
-        if 'square' in images:
-            try:
-                thumb = data['images']['square']['resolutions'][-1]['url']
-            except Exception:
-                pass
-        if 'portrait' in images and thumb is None:
-            try:
-                thumb = data['images']['portrait']['resolutions'][-1]['url']
-            except Exception:
-                pass
-        try:
-            fanart = data['images']['landscape']['resolutions'][-1]['url']
-        except Exception:
-            pass
-        if fanart:
-            item.art['fanart'] = item.art['thumb'] = fanart
-        if thumb:
-            item.art['thumb'] = thumb
-
-        item.info['duration'] = data.get('duration', None)
-
-        try:
-            item.info.date(data['availability']['start'].split('T')[0], '%Y-%m-%d')
-        except Exception:
-            pass
-
-        if data['kind']['code'].lower() in ['shows', 'show']:
-            item.set_callback(get_video_url, item_id=item_id, video_id=data['programId'])
-            item_post_treatment(
-                item,
-                is_playable=True,
-                is_downloadable=True)
-        else:
-            # Assume it's a folder
-            item.set_callback(list_zone,
-                              item_id=item_id,
-                              url=data['url'])
-            item_post_treatment(item)
+        item.label = zone['title']
+        item.info['plot'] = zone['description']
+        item.set_callback(list_programs, url=url, zone_id=zone['id'])
+        item_post_treatment(item)
         yield item
 
 
-@Resolver.register
-def get_video_url(plugin,
-                  item_id,
-                  video_id,
-                  download_mode=False,
-                  **kwargs):
+@Route.register
+def list_videos_search(plugin, search_query, **kwargs):
+    if search_query is None or len(search_query) == 0:
+        return False
 
-    return resolver_proxy.get_arte_video_stream(plugin,
-                                                DESIRED_LANGUAGE.lower(),
-                                                video_id,
-                                                download_mode)
+    params = {
+        'query': search_query,
+    }
+    response = urlquick.get(URL_ARTE_SEARCH % DESIRED_LANGUAGE.lower(), params=params, headers=ARTE_API_HEADERS, max_age=-1)
+    json_parser = response.json()
+
+    at_least_one_item = False
+    for zone in json_parser['zones']:
+        for data in zone['content']['data']:
+            item = handle_programs(data)
+            at_least_one_item = True
+            yield item
+
+    if not at_least_one_item:
+        plugin.notify(plugin.localize(30718), '')
+        yield False
+
+
+@Resolver.register
+def handle_programs(data):
+    title = data['title']
+    if 'subtitle' in data and data['subtitle']:
+        title += ' - ' + data['subtitle']
+
+    item = Listitem()
+    item.label = title
+    if 'teaserText' in data:
+        item.info['plot'] = data['teaserText']
+    else:
+        item.info['plot'] = data.get('shortDescription', None)
+
+    if 'mainImage' in data:
+        item.art['thumb'] = item.art["fanart"] = data['mainImage']['url'].replace('__SIZE__', '940x530')
+        item.art['landscape'] = data['mainImage']['url'].replace('__SIZE__', '265x397')
+
+    if 'duration' in data:
+        item.info['duration'] = data['duration']
+
+    try:
+        item.info.date(data['availability']['start'].split('T')[0], '%Y-%m-%d')
+    except Exception:
+        pass
+
+    if data.get('kind') is not None and data['kind']['code'] in ['SHOWS', 'SHOW']:
+        item.set_callback(get_video_url, video_id=data['programId'])
+        item_post_treatment(item, is_playable=True, is_downloadable=True)
+    else:
+        # Assume it's a folder
+        if data['deeplink'] is None:
+            # No items found
+            item.label = Script.localize(30896)
+        else:
+            deeplink_dic = data['deeplink'].split("/")
+            deeplink_len = len(deeplink_dic)
+            deeplink = deeplink_dic[deeplink_len - 1]
+            if deeplink_dic[deeplink_len - 2] == "emac":
+                item.set_callback(list_zone, url=URL_ARTE_CATEGORIES % (DESIRED_LANGUAGE.lower(), deeplink))
+                item_post_treatment(item)
+            elif deeplink_dic[deeplink_len - 2] == "collection":
+                item.set_callback(list_zone, url=URL_ARTE_COLLECTION % (DESIRED_LANGUAGE.lower(), deeplink))
+                item_post_treatment(item)
+            elif deeplink_dic[deeplink_len - 2] == "program":
+                item.set_callback(list_zone, url=URL_ARTE_PROGRAMS % (DESIRED_LANGUAGE.lower(), deeplink))
+                item_post_treatment(item)
+            else:
+                # No items found
+                item.label = Script.localize(30896)
+
+    return item
+
+
+@Route.register
+def list_programs(plugin, url, zone_id):
+    response = urlquick.get(url, headers=ARTE_API_HEADERS, max_age=-1)
+    json_parser = response.json()
+
+    if zone_id != 'pagination_link_next':
+        for zone in json_parser['zones']:
+            if zone_id == zone['id']:
+                data = zone['content']['data']
+                break
+        for data in zone['content']['data']:
+            item = handle_programs(data)
+            yield item
+
+        if zone.get('link') is not None and zone['link'].get('page')[:3] == "RC-":
+            item = handle_programs(zone.get('link'))
+            yield item
+
+        if zone['content'].get('pagination') is not None:
+            if zone['content']['pagination']['links'].get('next') is not None:
+                url_next = zone['content']['pagination']['links']['next']
+                yield Listitem.next_page(url=url_next, zone_id='pagination_link_next')
+    else:
+        for data in json_parser['data']:
+            item = handle_programs(data)
+            yield item
+
+        if json_parser.get('pagination') is not None:
+            if json_parser['pagination']['links'].get('next') is not None:
+                url_next = json_parser['pagination']['links']['next']
+                yield Listitem.next_page(url=url_next, zone_id='pagination_link_next')
+
+
+@Resolver.register
+def get_video_url(plugin, video_id, download_mode=False, **kwargs):
+    return resolver_proxy.get_arte_video_stream(plugin, DESIRED_LANGUAGE.lower(), video_id, download_mode)
 
 
 @Resolver.register
 def get_live_url(plugin, item_id, **kwargs):
     final_language = kwargs.get('language', DESIRED_LANGUAGE)
+    resp = urlquick.get(URL_LIVE_ARTE % final_language.lower(), headers=GENERIC_HEADERS)
+    json_parser = json.loads(resp.text)
 
-    try:
-        resp = urlquick.get(URL_TOKEN)
-        token = re.compile(r'token\"\:\"(.*?)\"').findall(resp.text)[0]
-    except Exception:
-        token = 'MzYyZDYyYmM1Y2Q3ZWRlZWFjMmIyZjZjNTRiMGY4MzY4NzBhOWQ5YjE4MGQ1NGFiODJmOTFlZDQwN2FkOTZjMQ'
-
-    headers = {
-        'Authorization': 'Bearer %s' % token
-    }
-    resp2 = urlquick.get(URL_LIVE_ARTE % final_language.lower(), headers=headers)
-    json_parser = json.loads(resp2.text)
-
-    is_helper = inputstreamhelper.Helper("hls")
-    if not is_helper.check_inputstream():
+    streams = json_parser["data"]["attributes"]["streams"]
+    if len(streams) == 0:
+        plugin.notify(plugin.localize(30600), plugin.localize(30716))
         return False
-
-    item = Listitem()
-    item.path = json_parser["data"]["attributes"]["streams"][0]["url"]
-    item.property[INPUTSTREAM_PROP] = "inputstream.adaptive"
-    item.property["inputstream.adaptive.manifest_type"] = "hls"
-
-    return item
+    video_url = streams[0]["url"]
+    return resolver_proxy.get_stream_with_quality(plugin, video_url=video_url)

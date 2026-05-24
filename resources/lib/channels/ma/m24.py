@@ -13,13 +13,8 @@ from codequick import Resolver
 
 from resources.lib import resolver_proxy, web_utils
 
-URL_LIVES = 'http://www.m24tv.ma/'
-
 
 @Resolver.register
 def get_live_url(plugin, item_id, **kwargs):
 
-    resp = urlquick.get(URL_LIVES)
-    video_url = re.compile(r'Direct\ TV[\S\s]*\"file\"\:\ \"(.*\.m3u8.*)\"\,').findall(resp.text)[0]
-
-    return resolver_proxy.get_stream_with_quality(plugin, video_url, manifest_type="hls")
+    return resolver_proxy.get_stream_youtube(plugin, 'CinxQ7HtNQ8')

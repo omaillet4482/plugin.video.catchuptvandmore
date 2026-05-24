@@ -118,6 +118,10 @@ msgctxt "#30033"
 msgid "Favourites"
 msgstr ""
 
+msgctxt "#30034"
+msgid "Internet service providers"
+msgstr ""
+
 
 # Countries (from 30050 to 30079)
 
@@ -217,6 +221,30 @@ msgctxt "#30073"
 msgid "Peru"
 msgstr ""
 
+msgctxt "#30074"
+msgid "Venezuela"
+msgstr ""
+
+msgctxt "#30075"
+msgid "Luxembourg"
+msgstr ""
+
+msgctxt "#30076"
+msgid "Bolivia"
+msgstr ""
+
+msgctxt "#30077"
+msgid "Saudi Arabia"
+msgstr ""
+
+msgctxt "#30078"
+msgid "Macedonia"
+msgstr ""
+
+msgctxt "#30079"
+msgid "Ireland"
+msgstr ""
+
 # Channels (from 30080 to 30129)
 
 msgctxt "#30080"
@@ -295,6 +323,10 @@ msgctxt "#30098"
 msgid "Peruvian channels"
 msgstr ""
 
+msgctxt "#30099"
+msgid "UK channels"
+msgstr ""
+
 # Websites (from 30130 to 30149)
 
 
@@ -303,6 +335,10 @@ msgstr ""
 
 msgctxt "#30150"
 msgid "Video quality"
+msgstr ""
+
+msgctxt "#30151"
+msgid "Device is L1 certified"
 msgstr ""
 
 msgctxt "#30152"
@@ -409,6 +445,26 @@ msgctxt "#30179"
 msgid "Europe, outside FBS"
 msgstr ""
 
+msgctxt "#30180"
+msgid "Video quality"
+msgstr ""
+
+msgctxt "#30181"
+msgid "Choose version"
+msgstr ""
+
+msgctxt "#30182"
+msgid "France 3 Régions: Choose subregion"
+msgstr ""
+
+msgctxt "#30183"
+msgid "Channel4: Programmes: Sort By"
+msgstr ""
+
+msgctxt "#30184"
+msgid "quality: "
+msgstr ""
+
 msgctxt "#30192"
 msgid "BEST"
 msgstr ""
@@ -461,14 +517,6 @@ msgstr ""
 
 
 # Accounts (from 30240 to 30269)
-
-msgctxt "#30240"
-msgid "NRJ Login"
-msgstr ""
-
-msgctxt "#30241"
-msgid "NRJ Password"
-msgstr ""
 
 msgctxt "#30242"
 msgid "VRT NU Login"
@@ -540,6 +588,38 @@ msgstr ""
 
 msgctxt "#30259"
 msgid "RTBF auvio Password"
+msgstr ""
+
+msgctxt "#30260"
+msgid "TF1+ Login"
+msgstr ""
+
+msgctxt "#30261"
+msgid "TF1+ Password"
+msgstr ""
+
+msgctxt "#30262"
+msgid "SFR TV login"
+msgstr ""
+
+msgctxt "#30263"
+msgid "SFR TV password"
+msgstr ""
+
+msgctxt "#30264"
+msgid "Channel 4 Login"
+msgstr ""
+
+msgctxt "#30265"
+msgid "Channel 4 Password"
+msgstr ""
+
+msgctxt "#30266"
+msgid "Log in to Channel5"
+msgstr ""
+
+msgctxt "#30267"
+msgid "Log out of Channel5"
 msgstr ""
 
 
@@ -890,7 +970,7 @@ msgid "No videos found"
 msgstr ""
 
 msgctxt "#30719"
-msgid "Inputstream Adaptive not enable"
+msgid "Inputstream Adaptive not enabled"
 msgstr ""
 
 msgctxt "#30720"
@@ -932,6 +1012,27 @@ msgstr ""
 msgctxt "#30731"
 msgid "Homepage"
 msgstr ""
+
+msgctxt "#30732"
+msgid "This content requires a payment. To buy or rent it, go to %s website at this URL : %s"
+msgstr ""
+
+msgctxt "#30733"
+msgid "Enter email"
+msgstr ""
+
+msgctxt "#30734"
+msgid "Enter password"
+msgstr ""
+
+msgctxt "#30735"
+msgid "Logged in successfully"
+msgstr ""
+
+msgctxt "#30736"
+msgid "Logged out successfully"
+msgstr ""
+
 
 # Favourites (from 30800 to 30859)
 
@@ -1007,4 +1108,8 @@ msgstr ""
 
 msgctxt "#30895"
 msgid "This resource is no longer available"
+msgstr ""
+
+msgctxt "#30896"
+msgid "No item"
 msgstr ""

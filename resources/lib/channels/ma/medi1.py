@@ -5,6 +5,7 @@
 # This file is part of Catch-up TV & More
 
 from __future__ import unicode_literals
+import json
 import re
 import urlquick
 
@@ -13,16 +14,15 @@ from codequick import Resolver
 
 from resources.lib import resolver_proxy, web_utils
 
-URL_LIVES = 'https://www.medi1tv.com/ar/live.aspx'
+URL_API = 'https://idara.medi1tv.ma/rss/medi1tv/live.aspx'
+
+GENERIC_HEADERS = {"User-Agent": web_utils.get_random_ua()}
 
 
 @Resolver.register
 def get_live_url(plugin, item_id, **kwargs):
-
-    resp = urlquick.get(URL_LIVES)
-    for possibility in resp.parse().findall('.//iframe'):
-        video_page = possibility.get('src')
-        if item_id in video_page:
-            resp2 = urlquick.get(video_page)
-            video_url = 'http:' + re.compile(r"file: \'(.*?)\'").findall(resp2.text)[0]
-            return resolver_proxy.get_stream_with_quality(plugin, video_url, manifest_type="hls")
+    streams = json.loads(
+        urlquick.get(URL_API, headers=GENERIC_HEADERS, max_age=-1).text)
+    for stream in streams:
+        if stream.get('titre') == item_id:
+            return resolver_proxy.get_easybroadcast_stream(plugin, stream.get('link'))

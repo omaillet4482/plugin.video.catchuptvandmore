@@ -5,34 +5,23 @@
 # This file is part of Catch-up TV & More
 
 from __future__ import unicode_literals
-import re
+
 import urlquick
 
-# noinspection PyUnresolvedReferences
 from codequick import Resolver
 
 from resources.lib import resolver_proxy, web_utils
 
-URL_LIVES = 'https://cdnamd-hls-globecast.akamaized.net/live/ramdisk/%s/hls_snrt/%s.m3u8'
+URL_ROOT = 'https://snrtlive.ma/'
+
+GENERIC_HEADERS = {'User-Agent': web_utils.get_random_windows_ua()}
 
 
 @Resolver.register
 def get_live_url(plugin, item_id, **kwargs):
 
-    if item_id == "alAoula":
-        id = "al_aoula_inter"
-    if item_id == "alMaghribia":
-        id = "al_maghribia_snrt"
-    if item_id == "laayoune":
-        id = "al_aoula_laayoune"
-    if item_id == "tamazight":
-        id = "tamazight_tv8_snrt"
-    if item_id == "assadissa":
-        id = "assadissa"
-    if item_id == "athaqafia":
-        id = "arrabiaa"
-    if item_id == "arryadia":
-        id = "arriadia"
-    video_url = URL_LIVES % (id, id)
+    url_live = URL_ROOT + 'fr/' + item_id
+    resp = urlquick.get(url_live, headers=GENERIC_HEADERS, max_age=-1)
+    url_easy_brodcast = resp.parse('iframe').get('src')
 
-    return resolver_proxy.get_stream_with_quality(plugin, video_url, manifest_type="hls")
+    return resolver_proxy.get_easybroadcast_stream(plugin, url=url_easy_brodcast)
